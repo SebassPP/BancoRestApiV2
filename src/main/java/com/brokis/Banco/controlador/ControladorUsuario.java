@@ -3,6 +3,7 @@ package com.brokis.Banco.controlador;
 import com.brokis.Banco.controlador.dto.UsuarioDTO;
 import com.brokis.Banco.servicio.Usuario.ServicioUsuario;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

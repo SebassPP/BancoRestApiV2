@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/cuenta")
 @AllArgsConstructor
+
 public class ControladorCuenta {
     private final ServicioCuenta servicioCuenta;
     @PostMapping("/creacion")

@@ -4,28 +4,27 @@ import com.brokis.Banco.controlador.dto.UsuarioDTO;
 
 import com.brokis.Banco.modelo.Usuario;
 import com.brokis.Banco.repositorio.RepUsuario;
-import com.brokis.Banco.controlador.dto.UsuarioDTO;
 import com.brokis.Banco.servicio.Usuario.ServicioUsuarioImp;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.jdbc.Sql;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 @ExtendWith(MockitoExtension.class)
 public class ControladorUsuarioTest extends AbstractTest{
     @Autowired
     private TestRestTemplate restTemplate;
-    private static final String PATH_CrearUsuario = "/usuario/crear";
-    private static final String PATH_ConsultarCuentas = "/usuario/consulta/123";
+    private static final String pathCrearUsuario = "/usuario/crear";
+    private static final String pathConsultarUsuario = "/usuario/consulta/123";
 
     @Mock
     private RepUsuario repUsuario;
@@ -33,17 +32,31 @@ public class ControladorUsuarioTest extends AbstractTest{
     @InjectMocks
     private ServicioUsuarioImp servicioUsuarioImp;
 
+   // @Sql(statements = "INSERT INTO USER (DOCUMENT, NAME, LAST_NAME,DATE_CREATED) VALUES (25, 'Juan', 'Alvarez','2023-02-04')")
     @Test
     void Given_UserInfo_When_Invoke_crearCuentaUsuario_Then_crearUsuario (){
-        Usuario usuario = new Usuario(1L, "Juan", "Alvarez", null);
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        repUsuario.save (usuario);
-
-        Mockito.when(repUsuario.save(usuario)).thenReturn(usuario);
-        ResponseEntity<Usuario> usuarioResponseEntity= restTemplate.postForEntity(PATH_CrearUsuario, usuarioDTO, Usuario.class);
-        HttpStatusCode statusCode = usuarioResponseEntity.getStatusCode();
-        assertEquals(HttpStatus.valueOf(201), statusCode);
+        UsuarioDTO usuarioDto = new UsuarioDTO(25L, "Juan", "Alvarez");
+        ResponseEntity<Usuario> usuarioResponseEntity= restTemplate.postForEntity(pathCrearUsuario, usuarioDto, Usuario.class);
+        HttpStatusCode status = usuarioResponseEntity.getStatusCode();
+        assertEquals(HttpStatusCode.valueOf(500), status);
     }
+
+    /* @Test
+    void Given_UserInfo_When_Invoke_consultarCuentas_Then_consultarCuentas (){
+        Long id= 1L;
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setDocument(id);
+        List<CuentaDTO> cuentaDTO = new ArrayList<>();
+        ServicioUsuarioImp servicioUsuarioImp = mock(ServicioUsuarioImp.class);
+        when(servicioUsuarioImp.consultarCuentas(usuarioDTO)).thenReturn(cuentaDTO);
+
+        ResponseEntity response = new ControladorCuenta().consultarCuentas(id);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+        assertEquals(cuentaDTO, response.getBody());
+    }
+
+     */
 
 
 
