@@ -1,5 +1,6 @@
 package com.brokis.Banco.servicio.Transaccion;
 
+import com.brokis.Banco.controlador.dto.TransaccionDTO;
 import com.brokis.Banco.modelo.*;
 import com.brokis.Banco.modelo.Transaccion;
 import com.brokis.Banco.repositorio.RepCuenta;
@@ -15,23 +16,26 @@ public class ServicioTransaccionImp implements ServicioTransaccion {
     public final RepTransaccion repTransaccion;
 
     @Override
-    public String hacerTransferencia(Long ID,Long ORIGIN, Long DESTINATION, int AMOUNT) {
+    public String hacerTransferencia(TransaccionDTO transaccionDTO) {
 
-        Cuenta CuentaOrigen = repCuenta.findById(ORIGIN).orElseThrow(() ->
+        Cuenta cuentaOrigen = repCuenta.findById(transaccionDTO.getCuentaOrigen()).orElseThrow(() ->
                 new RuntimeException("Cuenta origen no encontrada"));
-        Cuenta CuentaDestino = repCuenta.findById(DESTINATION).orElseThrow(() ->
+        Cuenta cuentaDestino = repCuenta.findById(transaccionDTO.getCuentaDestino()).orElseThrow(() ->
                 new RuntimeException("Cuenta destino no encontrada"));
 
-        if (CuentaOrigen.getSaldo() < AMOUNT) {
+        if (cuentaOrigen.getSaldo() < transaccionDTO.getMonto()) {
             throw new RuntimeException("Saldo insuficiente");
         }
 
-        System.out.println(DESTINATION);
-        CuentaOrigen.setSaldo(CuentaOrigen.getSaldo() - AMOUNT);
-        CuentaDestino.setSaldo(CuentaDestino.getSaldo() + AMOUNT);
-        repCuenta.save(CuentaDestino);
-        repCuenta.save(CuentaOrigen);
-        Transaccion nuevaTransaccion = new Transaccion( ID, ORIGIN,DESTINATION,AMOUNT);
+
+        cuentaOrigen.setSaldo(cuentaOrigen.getSaldo() - transaccionDTO.getMonto());
+        cuentaDestino.setSaldo(cuentaDestino.getSaldo() + transaccionDTO.getMonto());
+        repCuenta.save(cuentaDestino);
+        repCuenta.save(cuentaOrigen);
+        Transaccion nuevaTransaccion = new Transaccion();
+        nuevaTransaccion.setDestino(transaccionDTO.getCuentaDestino());
+        nuevaTransaccion.setOrigen(transaccionDTO.getCuentaOrigen());
+        nuevaTransaccion.setMonto(transaccionDTO.getMonto());
         repTransaccion.save(nuevaTransaccion);
 
         return "La Transferencia ha sido exitosa";

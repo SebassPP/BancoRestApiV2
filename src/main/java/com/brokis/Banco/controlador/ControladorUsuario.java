@@ -8,13 +8,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/usuario")
 @AllArgsConstructor
 public class ControladorUsuario {
     private final ServicioUsuario servicioUsuario;
 
-    @PostMapping("/crear")
+    @PostMapping("/creacion")
     public ResponseEntity crearCuenta(@RequestBody UsuarioDTO usuario) {
         return new ResponseEntity(servicioUsuario.crearUsuario(usuario), HttpStatus.CREATED);
     }
@@ -22,6 +25,6 @@ public class ControladorUsuario {
     public ResponseEntity consultarCuentas(@PathVariable Long id) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         usuarioDTO.setDocument(id);
-        return new ResponseEntity(servicioUsuario.consultarCuentas(usuarioDTO), HttpStatus.OK);
+        return new ResponseEntity(new ArrayList<>(servicioUsuario.consultarCuentas(usuarioDTO)), HttpStatus.OK);
     }
 }
