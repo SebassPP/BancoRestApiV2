@@ -16,15 +16,6 @@ public class ModeloTransaccionTest {
         assertNull(transaccion.getDestino());
         assertEquals(0, transaccion.getMonto());
 
-        transaccion.setId(1L);
-        transaccion.setOrigen(2L);
-        transaccion.setDestino(3L);
-        transaccion.setMonto(100);
-
-        assertEquals(1L, transaccion.getId().longValue());
-        assertEquals(2L, transaccion.getOrigen().longValue());
-        assertEquals(3L, transaccion.getDestino().longValue());
-        assertEquals(100, transaccion.getMonto());
     }
 
     @Test

@@ -50,9 +50,7 @@ public class ModeloUsuarioTest {
         assertNotNull(user.getFechaDeCreacion());
         assertTrue(user.getFechaDeCreacion() instanceof Date);
 
-
     }
 
-    //@Test
 
 }

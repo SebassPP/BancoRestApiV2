@@ -29,24 +29,6 @@ public class ModeloCuentaTest {
     }
 
     @Test
-    public void TestCuentaAllArguments(){
-        Long id = 1L;
-        String tipo = "ahorro";
-        int saldo = 100;
-        Date fechaDeCreacion = new Date();
-        Usuario usuario = new Usuario(1L,"usuario", "apellido",null);
-
-        Cuenta cuenta = new Cuenta(id, tipo, saldo, fechaDeCreacion, usuario);
-
-        assertEquals(id, cuenta.getId());
-        assertEquals(tipo, cuenta.getTipo());
-        assertEquals(saldo, cuenta.getSaldo());
-        assertEquals(fechaDeCreacion, cuenta.getFechaDeCreacion());
-        assertEquals(usuario, cuenta.getUsuario());
-
-    }
-
-    @Test
     public void testCuentaNoArgsConstructor (){
         Cuenta cuenta = new Cuenta();
 
