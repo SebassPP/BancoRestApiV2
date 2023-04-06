@@ -1,14 +1,11 @@
-package com.brokis.Banco;
+package com.brokis.Banco.modelo;
 
 import jakarta.persistence.EntityManager;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import com.brokis.Banco.modelo.Usuario;
 import org.mockito.MockitoAnnotations;
-import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.util.Date;
@@ -17,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ActiveProfiles("unitTest")
-public class ModeloUsuarioTest {
+public class UsuarioTest {
 
     @Mock
     private EntityManager entityManager;
@@ -35,7 +32,7 @@ public class ModeloUsuarioTest {
     }
 
     @Test
-    public void fechaCreacionPrePersist() {
+    public void Given_usuarioData_When_usuario_Then_prePersist() {
         user.setDocumento(123L);
         user.setNombre("nombre");
         user.setApellido("apellido");

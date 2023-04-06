@@ -1,4 +1,4 @@
-package com.brokis.Banco;
+package com.brokis.Banco.modelo;
 
 import com.brokis.Banco.modelo.Cuenta;
 import com.brokis.Banco.modelo.Usuario;
@@ -10,9 +10,9 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ActiveProfiles("unitTest")
-public class ModeloCuentaTest {
+public class CuentaTest {
     @Test
-    public void testCuenta(){
+    public void Given_cuenta_When_getData_Then_equalsValues(){
         Long id = 1L;
         String tipo = "ahorro";
         int saldo = 100;
@@ -29,7 +29,7 @@ public class ModeloCuentaTest {
     }
 
     @Test
-    public void testCuentaNoArgsConstructor (){
+    public void Given_cuenta_When_dataNull_Then_nullArgs(){
         Cuenta cuenta = new Cuenta();
 
         assertNull(cuenta.getId());
