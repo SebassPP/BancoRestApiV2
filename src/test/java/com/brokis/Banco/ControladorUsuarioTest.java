@@ -48,25 +48,4 @@ public class ControladorUsuarioTest extends AbstractTest{
         assertEquals(HttpStatusCode.valueOf(201), status);
     }
 
-    /*@Sql(statements = "INSERT INTO USER (DOCUMENT, NAME, LAST_NAME,DATE_CREATED) VALUES (25, 'Juan', 'Alvarez','2023-02-04')")
-    @Test
-    void Given_UserInfo_When_Invoke_consultarCuentas_Then_consultarCuentas (){
-        Long id= 1L;
-        UsuarioDTO usuarioDTO = new UsuarioDTO();
-        usuarioDTO.setDocument(id);
-        List<CuentaDTO> cuentaDTO = new ArrayList<>();
-        ServicioUsuarioImp servicioUsuarioImp = mock(ServicioUsuarioImp.class);
-        when(servicioUsuarioImp.consultarCuentas(usuarioDTO)).thenReturn(cuentaDTO);
-
-        ResponseEntity response = new ControladorCuenta().consultarCuentas(id);
-
-        assertEquals(HttpStatus.OK, response.getStatusCode());
-        assertEquals(cuentaDTO, response.getBody());
-    }
-*/
-
-
-
-
-
 }
