@@ -1,11 +1,11 @@
 package com.brokis.Banco.Servicios;
-import com.brokis.Banco.controlador.dto.TransaccionDTO;
+import com.brokis.Banco.gateway.dto.TransaccionDTO;
 import com.brokis.Banco.modelo.Cuenta;
 import com.brokis.Banco.modelo.Transaccion;
 import com.brokis.Banco.modelo.Usuario;
 import com.brokis.Banco.repositorio.RepCuenta;
 import com.brokis.Banco.repositorio.RepTransaccion;
-import com.brokis.Banco.servicio.Transaccion.ServicioTransaccionImp;
+import com.brokis.Banco.servicio.ServicioTransaccionImp;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,8 +27,8 @@ public class ServicioTransaccionImpTest {
     @Test
     void Given_OriginAccount_nonExistent_When_hacerTransaccion_Then_TrowIllegalArgument() {
         TransaccionDTO transaccionDTO = new TransaccionDTO();
-        transaccionDTO.setCuentaOrigen(123456789L);
-        when(repCuenta.findById(transaccionDTO.getCuentaOrigen())).thenReturn(Optional.empty());
+        transaccionDTO.setOrigen(123456789L);
+        when(repCuenta.findById(transaccionDTO.getOrigen())).thenReturn(Optional.empty());
 
         assertThatThrownBy(() -> servicioTransaccion.hacerTransferencia(transaccionDTO))
                 .isInstanceOf(RuntimeException.class)
@@ -37,10 +37,10 @@ public class ServicioTransaccionImpTest {
     @Test
     void Given_DestinyAccount_nonExistent_When_hacerTransaccion_Then_TrowIllegalArgument() {
         TransaccionDTO transaccionDTO = new TransaccionDTO();
-        transaccionDTO.setCuentaOrigen(123456789L);
-        when(repCuenta.findById(transaccionDTO.getCuentaOrigen())).thenReturn(Optional.of(new Cuenta()));
-        transaccionDTO.setCuentaDestino(987654321L);
-        when(repCuenta.findById(transaccionDTO.getCuentaDestino())).thenReturn(Optional.empty());
+        transaccionDTO.setOrigen(123456789L);
+        when(repCuenta.findById(transaccionDTO.getOrigen())).thenReturn(Optional.of(new Cuenta()));
+        transaccionDTO.setDestino(987654321L);
+        when(repCuenta.findById(transaccionDTO.getDestino())).thenReturn(Optional.empty());
         assertThatThrownBy(() -> servicioTransaccion.hacerTransferencia(transaccionDTO))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessage("Cuenta destino no encontrada");
@@ -49,11 +49,11 @@ public class ServicioTransaccionImpTest {
     void Given_AccountsOk_With_insufficient_balance_When_hacerTransaccion_Then_TrowRuntime() {
         TransaccionDTO transaccionDTO = new TransaccionDTO();
         transaccionDTO.setMonto(2000);
-        transaccionDTO.setCuentaOrigen(123456789L);
-        when(repCuenta.findById(transaccionDTO.getCuentaOrigen())).thenReturn(Optional.of(
+        transaccionDTO.setOrigen(123456789L);
+        when(repCuenta.findById(transaccionDTO.getOrigen())).thenReturn(Optional.of(
                 new Cuenta(123456789L, "Ahorros", 1000,null, new Usuario())));
-        transaccionDTO.setCuentaDestino(987654321L);
-        when(repCuenta.findById(transaccionDTO.getCuentaDestino())).thenReturn(Optional.of(
+        transaccionDTO.setDestino(987654321L);
+        when(repCuenta.findById(transaccionDTO.getDestino())).thenReturn(Optional.of(
                 new Cuenta(987654321L, "Ahorros", 1000,null, new Usuario())));
         assertThatThrownBy(() -> servicioTransaccion.hacerTransferencia(transaccionDTO))
                 .isInstanceOf(RuntimeException.class)
@@ -63,11 +63,11 @@ public class ServicioTransaccionImpTest {
     void Given_AccountsOk_With_sufficient_balance_When_hacerTransaccion_Then_return_String() {
         TransaccionDTO transaccionDTO = new TransaccionDTO();
         transaccionDTO.setMonto(500);
-        transaccionDTO.setCuentaOrigen(123456789L);
-        when(repCuenta.findById(transaccionDTO.getCuentaOrigen())).thenReturn(Optional.of(
+        transaccionDTO.setOrigen(123456789L);
+        when(repCuenta.findById(transaccionDTO.getOrigen())).thenReturn(Optional.of(
                 new Cuenta(123456789L, "Ahorros", 1000, null, new Usuario())));
-        transaccionDTO.setCuentaDestino(987654321L);
-        when(repCuenta.findById(transaccionDTO.getCuentaDestino())).thenReturn(Optional.of(
+        transaccionDTO.setDestino(987654321L);
+        when(repCuenta.findById(transaccionDTO.getDestino())).thenReturn(Optional.of(
                 new Cuenta(987654321L, "Ahorros", 1000, null, new Usuario())));
 
         Mockito.when(repTransaccion.save(Mockito.any(Transaccion.class))).thenReturn(new Transaccion());
