@@ -25,6 +25,11 @@ public class ControladorCuenta {
         idCuentaDTO.setId(id);
         return new ResponseEntity(servicioCuenta.consultarSaldo(idCuentaDTO), HttpStatus.OK);
     }
+    @PostMapping("/mostrar")
+    public ResponseEntity consultarCuentas(@RequestBody CuentaDTO usuario){
+
+        return new ResponseEntity(servicioCuenta.consultarCuentas(usuario), HttpStatus.OK);
+    }
     @PutMapping("/deposito/{id}/{monto}")
     public ResponseEntity realizarDeposito(@PathVariable Long id, @PathVariable int monto) {
         IdCuentaDTO idCuentaDTO = new IdCuentaDTO();

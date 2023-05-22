@@ -55,4 +55,14 @@ public class ServicioCuentaImp implements ServicioCuenta {
         repCuenta.delete(cuentaBuscada);
         return null;
     }
+
+    @Override
+    public List consultarCuentas(CuentaDTO cuentaDTO) {
+        Usuario usuarioBuscado = repositoryUsuario.findById(cuentaDTO.getDocumentoUsuario())
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        List<Cuenta> byUsuario = repCuenta.findByUsuario(usuarioBuscado);
+
+        return byUsuario;
+    }
 }
