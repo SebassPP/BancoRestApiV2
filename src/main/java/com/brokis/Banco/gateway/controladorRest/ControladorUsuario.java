@@ -1,6 +1,6 @@
-package com.brokis.Banco.controlador;
+package com.brokis.Banco.gateway.controladorRest;
 
-import com.brokis.Banco.controlador.dto.UsuarioDTO;
+import com.brokis.Banco.gateway.dto.UsuarioDTO;
 import com.brokis.Banco.servicio.Usuario.ServicioUsuario;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -8,7 +8,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")

@@ -1,4 +1,4 @@
-package com.brokis.Banco.config;
+package com.brokis.Banco.gateway.rabbitmq;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MqConfig {
-    @Value("$tranferencia")
+    @Value("transferencia")
     private String jsonQueue;
 
     @Value("adminTransferencia")

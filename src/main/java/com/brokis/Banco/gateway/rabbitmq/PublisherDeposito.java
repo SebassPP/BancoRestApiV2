@@ -1,6 +1,5 @@
-package com.brokis.Banco.controlador.rabbitMQ;
-import com.brokis.Banco.controlador.dto.IdCuentaDTO;
-import com.brokis.Banco.controlador.dto.TransaccionDTO;
+package com.brokis.Banco.gateway.rabbitmq;
+import com.brokis.Banco.gateway.dto.IdCuentaDTO;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

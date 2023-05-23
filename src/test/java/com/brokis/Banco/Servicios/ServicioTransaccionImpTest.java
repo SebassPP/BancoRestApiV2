@@ -1,5 +1,5 @@
 package com.brokis.Banco.Servicios;
-import com.brokis.Banco.controlador.dto.TransaccionDTO;
+import com.brokis.Banco.gateway.dto.TransaccionDTO;
 import com.brokis.Banco.modelo.Cuenta;
 import com.brokis.Banco.modelo.Transaccion;
 import com.brokis.Banco.modelo.Usuario;

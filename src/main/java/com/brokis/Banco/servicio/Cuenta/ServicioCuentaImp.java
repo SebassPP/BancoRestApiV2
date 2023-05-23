@@ -1,6 +1,6 @@
 package com.brokis.Banco.servicio.Cuenta;
-import com.brokis.Banco.controlador.dto.CuentaDTO;
-import com.brokis.Banco.controlador.dto.IdCuentaDTO;
+import com.brokis.Banco.gateway.dto.CuentaDTO;
+import com.brokis.Banco.gateway.dto.IdCuentaDTO;
 import com.brokis.Banco.modelo.*;
 import com.brokis.Banco.repositorio.RepCuenta;
 import com.brokis.Banco.repositorio.RepUsuario;

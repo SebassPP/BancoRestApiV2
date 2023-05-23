@@ -1,6 +1,6 @@
 package com.brokis.Banco.servicio.Transaccion;
 
-import com.brokis.Banco.controlador.dto.TransaccionDTO;
+import com.brokis.Banco.gateway.dto.TransaccionDTO;
 import com.brokis.Banco.modelo.*;
 import com.brokis.Banco.modelo.Transaccion;
 import com.brokis.Banco.repositorio.RepCuenta;

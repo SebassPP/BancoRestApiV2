@@ -1,7 +1,7 @@
-package com.brokis.Banco.controlador;
+package com.brokis.Banco.gateway;
 
 import com.brokis.Banco.AbstractTest;
-import com.brokis.Banco.controlador.dto.CuentaDTO;
+import com.brokis.Banco.gateway.dto.CuentaDTO;
 import com.brokis.Banco.modelo.Cuenta;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package com.brokis.Banco.controlador.dto;
+package com.brokis.Banco.gateway.dto;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;

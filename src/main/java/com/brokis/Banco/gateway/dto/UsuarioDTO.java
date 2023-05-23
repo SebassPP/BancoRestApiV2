@@ -1,4 +1,4 @@
-package com.brokis.Banco.controlador.dto;
+package com.brokis.Banco.gateway.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -10,7 +10,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class CuentaDTO {
-  private String tipo;
-  private long documentoUsuario;
+public class UsuarioDTO {
+  private Long document;
+  private String name;
+  private String lastName;
 }
