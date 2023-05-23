@@ -82,23 +82,6 @@ public class ServicioCuentaImpTest {
         Assertions.assertEquals(result.getId(),idCuentaDTO.getId());
     }
     @Test
-    void Given_nonExistent_Account_When_depositarCuenta_Then_TrowIllegalArgument() {
-        IdCuentaDTO idCuentaDTO = new IdCuentaDTO(1L,100);
-        when(repCuenta.findById(idCuentaDTO.getId())).thenReturn(Optional.empty());
-        assertThatThrownBy(() -> servicioCuenta.depositarCuenta(idCuentaDTO))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessage("Cuenta no encontrada");
-    }
-    @Test
-    void Given_AccountOk_When_depositarCuenta_Then_return_Account() {
-        IdCuentaDTO idCuentaDTO = new IdCuentaDTO(1L,100);
-        when(repCuenta.findById(idCuentaDTO.getId())).thenReturn(Optional.of(new Cuenta(1L,"Ahorros",100,null,null)));
-        Cuenta cuentaBuscada = repCuenta.findById(idCuentaDTO.getId()).get();
-        cuentaBuscada.setSaldo(cuentaBuscada.getSaldo()+idCuentaDTO.getMonto());
-        int result = cuentaBuscada.getSaldo();
-        Assertions.assertEquals(200,result);
-    }
-    @Test
     void Given_nonExistent_Account_When_eliminarCuenta_Then_TrowIllegalArgument() {
         IdCuentaDTO idCuentaDTO = new IdCuentaDTO(1L,0);
         when(repCuenta.findById(idCuentaDTO.getId())).thenReturn(Optional.empty());

@@ -29,13 +29,6 @@ public class ControladorCuenta {
 
         return new ResponseEntity(servicioCuenta.consultarCuentas(usuario), HttpStatus.OK);
     }
-    @PutMapping("/deposito/{id}/{monto}")
-    public ResponseEntity realizarDeposito(@PathVariable Long id, @PathVariable int monto) {
-        IdCuentaDTO idCuentaDTO = new IdCuentaDTO();
-        idCuentaDTO.setId(id);
-        idCuentaDTO.setMonto(monto);
-        return new ResponseEntity(servicioCuenta.depositarCuenta(idCuentaDTO), HttpStatus.OK);
-    }
     @DeleteMapping("/eliminacion/{id}")
     public ResponseEntity eliminarCuenta(@PathVariable Long id){
         IdCuentaDTO idCuentaDTO = new IdCuentaDTO();

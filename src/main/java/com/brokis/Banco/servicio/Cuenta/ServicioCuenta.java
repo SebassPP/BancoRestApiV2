@@ -9,7 +9,6 @@ import java.util.List;
 public interface ServicioCuenta {
     Cuenta crearCuenta(CuentaDTO cuenta);
     Cuenta consultarSaldo(IdCuentaDTO idCuentaDTO);
-    Cuenta depositarCuenta(IdCuentaDTO idCuentaDTO);
     Cuenta eliminarCuenta(IdCuentaDTO idCuentaDTO);
     List consultarCuentas(CuentaDTO cuentaDTO);
 }
