@@ -40,7 +40,7 @@ test {
 }
 sonarqube {
 	properties{
-		property("sonar.projectName", "gestorDepositos-Banco")
+		property("sonar.projectName", "Banco-API")
 		property("sonar.host.url", "http://localhost:9000")
 		property("sonar.login", "admin")
 		property("sonar.password", "admin123")
