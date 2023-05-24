@@ -1,6 +1,6 @@
 package com.brokis.Banco.Servicios;
-import com.brokis.Banco.controlador.dto.CuentaDTO;
-import com.brokis.Banco.controlador.dto.IdCuentaDTO;
+import com.brokis.Banco.gateway.dto.CuentaDTO;
+import com.brokis.Banco.gateway.dto.IdCuentaDTO;
 import com.brokis.Banco.modelo.Cuenta;
 import com.brokis.Banco.modelo.Usuario;
 import com.brokis.Banco.repositorio.RepCuenta;
@@ -11,7 +11,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,23 +80,6 @@ public class ServicioCuentaImpTest {
         when(repCuenta.findById(idCuentaDTO.getId())).thenReturn(Optional.of(new Cuenta(1L,"Ahorros",0,null,null)));
         Cuenta result = servicioCuenta.consultarSaldo(idCuentaDTO);
         Assertions.assertEquals(result.getId(),idCuentaDTO.getId());
-    }
-    @Test
-    void Given_nonExistent_Account_When_depositarCuenta_Then_TrowIllegalArgument() {
-        IdCuentaDTO idCuentaDTO = new IdCuentaDTO(1L,100);
-        when(repCuenta.findById(idCuentaDTO.getId())).thenReturn(Optional.empty());
-        assertThatThrownBy(() -> servicioCuenta.depositarCuenta(idCuentaDTO))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessage("Cuenta no encontrada");
-    }
-    @Test
-    void Given_AccountOk_When_depositarCuenta_Then_return_Account() {
-        IdCuentaDTO idCuentaDTO = new IdCuentaDTO(1L,100);
-        when(repCuenta.findById(idCuentaDTO.getId())).thenReturn(Optional.of(new Cuenta(1L,"Ahorros",100,null,null)));
-        Cuenta cuentaBuscada = repCuenta.findById(idCuentaDTO.getId()).get();
-        cuentaBuscada.setSaldo(cuentaBuscada.getSaldo()+idCuentaDTO.getMonto());
-        int result = cuentaBuscada.getSaldo();
-        Assertions.assertEquals(200,result);
     }
     @Test
     void Given_nonExistent_Account_When_eliminarCuenta_Then_TrowIllegalArgument() {

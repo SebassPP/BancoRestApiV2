@@ -1,8 +1,7 @@
-package com.brokis.Banco.controlador;
+package com.brokis.Banco.gateway.controladorRest;
 
-import com.brokis.Banco.controlador.dto.CuentaDTO;
-import com.brokis.Banco.controlador.dto.IdCuentaDTO;
-import com.brokis.Banco.modelo.*;
+import com.brokis.Banco.gateway.dto.CuentaDTO;
+import com.brokis.Banco.gateway.dto.IdCuentaDTO;
 import com.brokis.Banco.servicio.Cuenta.ServicioCuenta;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,13 +28,6 @@ public class ControladorCuenta {
     public ResponseEntity consultarCuentas(@RequestBody CuentaDTO usuario){
 
         return new ResponseEntity(servicioCuenta.consultarCuentas(usuario), HttpStatus.OK);
-    }
-    @PutMapping("/deposito/{id}/{monto}")
-    public ResponseEntity realizarDeposito(@PathVariable Long id, @PathVariable int monto) {
-        IdCuentaDTO idCuentaDTO = new IdCuentaDTO();
-        idCuentaDTO.setId(id);
-        idCuentaDTO.setMonto(monto);
-        return new ResponseEntity(servicioCuenta.depositarCuenta(idCuentaDTO), HttpStatus.OK);
     }
     @DeleteMapping("/eliminacion/{id}")
     public ResponseEntity eliminarCuenta(@PathVariable Long id){

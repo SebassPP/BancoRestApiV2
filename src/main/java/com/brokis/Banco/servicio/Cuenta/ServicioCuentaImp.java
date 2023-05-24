@@ -1,6 +1,6 @@
 package com.brokis.Banco.servicio.Cuenta;
-import com.brokis.Banco.controlador.dto.CuentaDTO;
-import com.brokis.Banco.controlador.dto.IdCuentaDTO;
+import com.brokis.Banco.gateway.dto.CuentaDTO;
+import com.brokis.Banco.gateway.dto.IdCuentaDTO;
 import com.brokis.Banco.modelo.*;
 import com.brokis.Banco.repositorio.RepCuenta;
 import com.brokis.Banco.repositorio.RepUsuario;
@@ -42,27 +42,18 @@ public class ServicioCuentaImp implements ServicioCuenta {
         }
     }
     @Override
-    public Cuenta depositarCuenta(IdCuentaDTO idCuentaDTO) {
-        Cuenta cuentaBuscada = repCuenta.findById(idCuentaDTO.getId()).orElseThrow(() ->
-                new RuntimeException("Cuenta no encontrada"));
-        cuentaBuscada.setSaldo(cuentaBuscada.getSaldo() + idCuentaDTO.getMonto());
-        return repCuenta.save(cuentaBuscada);
-    }
-    @Override
     public Cuenta eliminarCuenta(IdCuentaDTO idCuentaDTO) {
         Cuenta cuentaBuscada = repCuenta.findById(idCuentaDTO.getId()).orElseThrow(() ->
                 new RuntimeException("Cuenta no encontrada"));
         repCuenta.delete(cuentaBuscada);
         return null;
     }
-
     @Override
     public List consultarCuentas(CuentaDTO cuentaDTO) {
         Usuario usuarioBuscado = repositoryUsuario.findById(cuentaDTO.getDocumentoUsuario())
                 .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
         List<Cuenta> byUsuario = repCuenta.findByUsuario(usuarioBuscado);
-
         return byUsuario;
     }
 }
