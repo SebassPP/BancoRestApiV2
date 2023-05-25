@@ -11,5 +11,9 @@ class BancoApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	@Test
+	void main_shouldStartApplicationWithoutErrors() {
+		BancoApplication.main(new String[]{});
+	}
 
 }

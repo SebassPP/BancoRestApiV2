@@ -13,15 +13,18 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
-public class PruebasControladorCuenta extends AbstractTest {
+public class ControladorCuentaTest extends AbstractTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
     private static final String pathCuentaCreacion = "/cuenta/creacion";
     private static final String pathCuentaConsulta = "/cuenta/consulta/2";
+    private static final String pathCuentaMostrar = "/cuenta/mostrar";
     private static final  String pathCuentaEliminar = "/cuenta/eliminacion/1";
 
 
@@ -71,6 +74,19 @@ public class PruebasControladorCuenta extends AbstractTest {
 
         assertEquals(HttpStatusCode.valueOf(200),status);
 
+    }
+
+    @Test
+    @Sql(statements = "INSERT INTO USER (DOCUMENT,NAME,LAST_NAME,DATE_CREATED)VALUES (19,'JUAN','PARRADO','2023-03-23')")
+    @Sql(statements = "INSERT INTO ACCOUNT (TYPE,MONEY,DATE_CREATED,USER) VALUES ('AHORROS','1000','2023-03-23',19)")
+    public void Given_CuentaDTO_When_invoke_mostrarCuentas_Then_return_ListCuentas(){
+        CuentaDTO dto = new CuentaDTO(null, 19);
+
+        ResponseEntity<List> responseEntity = restTemplate.postForEntity(pathCuentaMostrar, dto, List.class);
+
+        HttpStatusCode status = responseEntity.getStatusCode();
+
+        assertEquals(HttpStatusCode.valueOf(200), status);
     }
 
 
