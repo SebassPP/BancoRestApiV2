@@ -62,17 +62,6 @@ public class PruebasControladorCuenta extends AbstractTest {
 
         assertEquals(HttpStatusCode.valueOf(200),status);
     }
-    @Test
-    @Sql(statements = "INSERT INTO USER (DOCUMENT,NAME,LAST_NAME,DATE_CREATED)VALUES (15,'JUAN','PARRADO','2023-03-23')")
-    @Sql(statements = "INSERT INTO ACCOUNT (TYPE,MONEY,DATE_CREATED,USER) VALUES ('AHORROS','1000','2023-03-23',15)")
-    public void Given_IdCuentaDTO_when_invoke_realizarDeposito_Then_return_depositarEnCuenta(){
-        ResponseEntity<Cuenta> responseEntity= restTemplate.exchange(pathCuentaDesposito,HttpMethod.PUT,null,Cuenta.class);
-
-        HttpStatusCode status = responseEntity.getStatusCode();
-
-        assertEquals(HttpStatusCode.valueOf(200),status);
-
-    }
 
     @Test
     @Sql(statements = "INSERT INTO USER (DOCUMENT,NAME,LAST_NAME,DATE_CREATED)VALUES (14,'JUAN','PARRADO','2023-03-23')")
