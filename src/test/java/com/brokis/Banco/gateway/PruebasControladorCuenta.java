@@ -22,8 +22,6 @@ public class PruebasControladorCuenta extends AbstractTest {
     private TestRestTemplate restTemplate;
     private static final String pathCuentaCreacion = "/cuenta/creacion";
     private static final String pathCuentaConsulta = "/cuenta/consulta/2";
-    private static final String pathCuentaDesposito = "/cuenta/deposito/2/1000";
-
     private static final  String pathCuentaEliminar = "/cuenta/eliminacion/1";
 
 
