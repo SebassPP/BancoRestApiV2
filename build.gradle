@@ -8,7 +8,7 @@ plugins {
 
 group = 'com.brokis'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '19'
+sourceCompatibility = '17'
 
 configurations {
 	compileOnly {
@@ -48,17 +48,12 @@ sonarqube {
 }
 jacocoTestReport {
 	dependsOn(test)
-	reports {
-		xml.enabled false
-		html.enabled true
-
-	}
-
 	afterEvaluate {
 		classDirectories.setFrom(files(classDirectories.files.collect {
 			fileTree(dir: it, exclude: [
 					"**/dto/**",
-					"**/modelo/*"
+					"**/modelo/*",
+					"**/repositorio/*"
 			])
 		}))
 	}
