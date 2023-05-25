@@ -15,13 +15,13 @@ public class ControladorServiciosExternos {
     private final PublisherTransaccion PublisherTransaccion;
     private final PublisherDeposito publisherDeposito;
     @PostMapping("/transferencia")
-    public ResponseEntity<String> envioTransferencia(@RequestBody TransaccionDTO transaccionDTO){
+    public ResponseEntity envioTransferencia(@RequestBody TransaccionDTO transaccionDTO){
         PublisherTransaccion.sendJsonMessage(transaccionDTO);
-        return ResponseEntity.ok("Transaccion enviada = "+transaccionDTO);
+        return ResponseEntity.ok(transaccionDTO);
     }
     @PostMapping("/deposito")
-    public ResponseEntity<String> envioDeposito(@RequestBody IdCuentaDTO idCuentaDTO){
+    public ResponseEntity envioDeposito(@RequestBody IdCuentaDTO idCuentaDTO){
         publisherDeposito.sendJsonMessage(idCuentaDTO);
-        return ResponseEntity.ok("Deposito enviado = "+idCuentaDTO);
+        return ResponseEntity.ok(idCuentaDTO);
     }
 }
